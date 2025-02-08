@@ -1,0 +1,268 @@
+[
+    {
+        "name": "Jake Monroe",
+        "position": "singer",
+        "genre": "rock",
+        "rarity": "gold",
+        "image": "RockStarImages/GoldRockSinger1"
+    },
+    {
+        "name": "Sophia Carter",
+        "position": "drummer",
+        "genre": "pop",
+        "rarity": "purple",
+        "image": "RockStarImages/PurplePopDrummer1"
+    },
+    {
+        "name": "Noah Reed",
+        "position": "guitarist",
+        "genre": "rap",
+        "rarity": "green",
+        "image": "RockStarImages/GreenRapGuitarist1"
+    },
+    {
+        "name": "Liam Hayes",
+        "position": "bassist",
+        "genre": "country",
+        "rarity": "grey",
+        "image": "RockStarImages/GreyCountryBassist1"
+    },
+    {
+        "name": "Ava Kingston",
+        "position": "singer",
+        "genre": "pop",
+        "rarity": "gold",
+        "image": "RockStarImages/GoldPopSinger1"
+    },
+    {
+        "name": "Mason Drake",
+        "position": "drummer",
+        "genre": "rock",
+        "rarity": "green",
+        "image": "RockStarImages/GreenRockDrummer1"
+    },
+    {
+        "name": "Olivia Woods",
+        "position": "guitarist",
+        "genre": "country",
+        "rarity": "purple",
+        "image": "RockStarImages/PurpleCountryGuitarist1"
+    },
+    {
+        "name": "Ethan Scott",
+        "position": "bassist",
+        "genre": "rap",
+        "rarity": "gold",
+        "image": "RockStarImages/GoldRapBassist1"
+    },
+    {
+        "name": "Zoe Lane",
+        "position": "singer",
+        "genre": "rock",
+        "rarity": "grey",
+        "image": "RockStarImages/GreyRockSinger1"
+    },
+    {
+        "name": "Lucas Stone",
+        "position": "drummer",
+        "genre": "pop",
+        "rarity": "purple",
+        "image": "RockStarImages/PurplePopDrummer2"
+    },
+    {
+        "name": "Nathan Brooks",
+        "position": "guitarist",
+        "genre": "rap",
+        "rarity": "grey",
+        "image": "RockStarImages/GreyRapGuitarist1"
+    },
+    {
+        "name": "Aria Ray",
+        "position": "bassist",
+        "genre": "country",
+        "rarity": "green",
+        "image": "RockStarImages/GreenCountryBassist1"
+    },
+    {
+        "name": "Sebastian Reed",
+        "position": "singer",
+        "genre": "pop",
+        "rarity": "purple",
+        "image": "RockStarImages/PurplePopSinger2"
+    },
+    {
+        "name": "Mia Harmon",
+        "position": "drummer",
+        "genre": "rock",
+        "rarity": "grey",
+        "image": "RockStarImages/GreyRockDrummer1"
+    },
+    {
+        "name": "Owen Carter",
+        "position": "guitarist",
+        "genre": "rap",
+        "rarity": "purple",
+        "image": "RockStarImages/PurpleRapGuitarist1"
+    },
+    {
+        "name": "Grace Monroe",
+        "position": "bassist",
+        "genre": "country",
+        "rarity": "grey",
+        "image": "RockStarImages/GreyCountryBassist2"
+    },
+    {
+        "name": "Logan Santos",
+        "position": "singer",
+        "genre": "rock",
+        "rarity": "green",
+        "image": "RockStarImages/GreenRockSinger1"
+    },
+    {
+        "name": "Isabella West",
+        "position": "drummer",
+        "genre": "pop",
+        "rarity": "grey",
+        "image": "RockStarImages/GreyPopDrummer1"
+    },
+    {
+        "name": "Noah Drake",
+        "position": "guitarist",
+        "genre": "rap",
+        "rarity": "gold",
+        "image": "RockStarImages/GoldRapGuitarist1"
+    },
+    {
+        "name": "Chloe Vance",
+        "position": "bassist",
+        "genre": "country",
+        "rarity": "purple",
+        "image": "RockStarImages/PurpleCountryBassist1"
+    },
+    {
+        "name": "Ethan Lane",
+        "position": "singer",
+        "genre": "pop",
+        "rarity": "grey",
+        "image": "RockStarImages/GreyPopSinger1"
+    },
+    {
+        "name": "Olivia Scott",
+        "position": "drummer",
+        "genre": "rock",
+        "rarity": "purple",
+        "image": "RockStarImages/PurpleRockDrummer1"
+    },
+    {
+        "name": "Nathan Brooks",
+        "position": "guitarist",
+        "genre": "rap",
+        "rarity": "green",
+        "image": "RockStarImages/GreenRapGuitarist2"
+    },
+    {
+        "name": "Ava Knight",
+        "position": "bassist",
+        "genre": "country",
+        "rarity": "green",
+        "image": "RockStarImages/GreenCountryBassist2"
+    },
+    {
+        "name": "Mason Reed",
+        "position": "singer",
+        "genre": "pop",
+        "rarity": "purple",
+        "image": "RockStarImages/PurplePopSinger2"
+    },
+    {
+        "name": "Sophia Monroe",
+        "position": "drummer",
+        "genre": "rock",
+        "rarity": "grey",
+        "image": "RockStarImages/GreyRockDrummer2"
+    },
+    {
+        "name": "Jake Carter",
+        "position": "guitarist",
+        "genre": "rap",
+        "rarity": "purple",
+        "image": "RockStarImages/PurpleRapGuitarist2"
+    },
+    {
+        "name": "Emily Woods",
+        "position": "bassist",
+        "genre": "country",
+        "rarity": "gold",
+        "image": "RockStarImages/GoldCountryBassist1"
+    },
+    {
+        "name": "Liam Flynn",
+        "position": "singer",
+        "genre": "rock",
+        "rarity": "green",
+        "image": "RockStarImages/GreenRockSinger2"
+    },
+    {
+        "name": "Zoe Ray",
+        "position": "drummer",
+        "genre": "pop",
+        "rarity": "grey",
+        "image": "RockStarImages/GreyPopDrummer2"
+    },
+    {
+        "name": "Lucas Kingston",
+        "position": "drummer",
+        "genre": "rap",
+        "rarity": "gold",
+        "image": "RockStarImages/GoldRapDrummer1"
+    },
+    {
+        "name": "Aria Hayes",
+        "position": "bassist",
+        "genre": "country",
+        "rarity": "purple",
+        "image": "RockStarImages/PurpleCountryBassist2"
+    },
+    {
+        "name": "Sebastian Harmon",
+        "position": "singer",
+        "genre": "pop",
+        "rarity": "grey",
+        "image": "RockStarImages/GreyPopSinger2"
+    },
+    {
+        "name": "Mia Carter",
+        "position": "drummer",
+        "genre": "rock",
+        "rarity": "purple",
+        "image": "RockStarImages/PurpleRockDrummer2"
+    },
+    {
+        "name": "Owen Foster",
+        "position": "guitarist",
+        "genre": "rap",
+        "rarity": "grey",
+        "image": "RockStarImages/GreyRapGuitarist2"
+    },
+    {
+        "name": "Grace Lane",
+        "position": "bassist",
+        "genre": "country",
+        "rarity": "green",
+        "image": "RockStarImages/GreenCountryBassist3"
+    },
+    {
+        "name": "Logan Scott",
+        "position": "singer",
+        "genre": "pop",
+        "rarity": "grey",
+        "image": "RockStarImages/GreyPopSinger3"
+    },
+    {
+        "name": "Isabella Reed",
+        "position": "drummer",
+        "genre": "rock",
+        "rarity": "purple",
+        "image": "RockStarImages/PurpleRockDrummer3"
+    }
+]
