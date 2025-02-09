@@ -59,5 +59,5 @@ struct InfoView: View {
 }
 
 #Preview {
-    CardView(musician: Character(name: "Luke Brian", position: "Guitarist", genre: "Country", rarity: "purple", image: .goldPopSinger1))
+    CardView(musician: Character(name: "Luke Brian", position: "Guitarist", genre: "Country", rarity: "purple", image: .goldPopSinger1, inUse: false))
 }

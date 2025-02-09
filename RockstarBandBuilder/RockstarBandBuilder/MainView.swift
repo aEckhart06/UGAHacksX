@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct MainView: View {
-    @State var numCoins: Int = 0
+    @State var numCoins: Int = 20
+    @State var appData: AppData = AppData()
     init() {
         let appearance = UITabBarAppearance()
         appearance.backgroundColor = UIColor.black // Set the background color
@@ -24,7 +25,7 @@ struct MainView: View {
             VStack{
                 TabView {
                     Tab {
-                        BandView(numCoins: $numCoins)
+                        BandView(numCoins: $numCoins, appData: $appData)
                     } label: {
                         Image(systemName: "person")
                             .padding()
@@ -37,7 +38,7 @@ struct MainView: View {
                     }
                     
                     Tab {
-                        PackView(numCoins: $numCoins)
+                        PackView(numCoins: $numCoins, appData: $appData)
                     } label: {
                         Image(systemName: "rectangle")
                     }

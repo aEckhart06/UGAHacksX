@@ -19,77 +19,83 @@ struct BandView: View {
     @State var addPlayerView: Bool = false
     @State var selectedMusician: Character? = nil
     @State var musicians: [Character] = Characters().characters
+    @Binding var appData: AppData
 
     var body: some View {
         
             
             
         NavigationView {
-            
-            ZStack {
-                // Add gradient background
-                LinearGradient(
-                    gradient: Gradient(colors: [.purple, .black]),
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .ignoresSafeArea()
-                ScrollView(.vertical) {
-                    HStack(spacing: 20) {
-                        SingerCardView(cardWidth: cardWidth, musician: $leadSinger)
-                        
-                        GuitaristCardView(cardWidth: cardWidth, musician: $leadGuitarist)
-                    }
-                    .padding()
-                    HStack(spacing: 20) {
-                        DrummerCardView(cardWidth: cardWidth, musician: $leadDrummer)
-                        BassistCardView(cardWidth: cardWidth, musician: $leadBassist)
-                    }
-                    .padding()
-                    VStack {
-                        
-                        ForEach(musicians, id: \.self) { musician in
+            ScrollViewReader { proxy in
+                ZStack {
+                    // Add gradient background
+                    LinearGradient(
+                        gradient: Gradient(colors: [.purple, .black]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                    .ignoresSafeArea()
+                    ScrollView {
+                        HStack(spacing: 20) {
+                            SingerCardView(cardWidth: cardWidth, musician: $leadSinger)
                             
-                            Button {
-                                addPlayerView = true
-                                selectedMusician = musician
-                            } label: {
-                                musician
+                            GuitaristCardView(cardWidth: cardWidth, musician: $leadGuitarist)
+                        }
+                        .padding(.horizontal)
+                        HStack(spacing: 20) {
+                            DrummerCardView(cardWidth: cardWidth, musician: $leadDrummer)
+                            BassistCardView(cardWidth: cardWidth, musician: $leadBassist)
+                        }
+                        .padding(.horizontal)
+                        VStack {
+                            HStack {
+                                Text("Your Musicians")
+                                    .foregroundStyle(.white)
+                                    .padding(.horizontal)
+                                Spacer()
                             }
-                            .foregroundStyle(.black)
-                        }
-                        
-                        
-                        
-                    }
-                    .padding(0)
-                }
-                .disabled(addPlayerView)
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        HStack {
-                            Text("\(numCoins)")
+                            Rectangle()
+                                .frame(height: 1)
                                 .foregroundStyle(.white)
-                                .font(.title3)
-                                .bold()
-                            Image(uiImage: .rCoin)
-                                .resizable()
-                                .frame(width: 30, height: 30)
+                            
+                            
+                            ForEach(appData.userMusicians, id: \.self) { musician in
+                                if !musician.inUse {
+                                    Button {
+                                        addPlayerView = true
+                                        selectedMusician = musician
+                                    } label: {
+                                        musician
+                                    }
+                                    .foregroundStyle(.black)
+                                }
+                            }
                         }
+                        .padding(0)
                     }
+                    .disabled(addPlayerView)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            HStack {
+                                Text("\(numCoins)")
+                                    .foregroundStyle(.white)
+                                    .font(.title3)
+                                    .bold()
+                                Image(uiImage: .rCoin)
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                            }
+                        }
+                        
+                    }
+                    .toolbarBackground(.purple, for: .navigationBar)
                     
-                }
-                .toolbarBackground(.purple, for: .navigationBar)
-                
-                
-                
-                
-                
-                // Message View
-                if addPlayerView {
-                    Color.black.opacity(0.5).ignoresSafeArea(.all)
-                    if let selectedMusician = self.selectedMusician {
-                        addMusician(player: selectedMusician)
+                    // Message View
+                    if addPlayerView {
+                        Color.black.opacity(0.5).ignoresSafeArea(.all)
+                        if let selectedMusician = self.selectedMusician {
+                            addMusician(player: selectedMusician, proxy: proxy)
+                        }
                     }
                 }
             }
@@ -101,7 +107,7 @@ struct BandView: View {
 
     
     @ViewBuilder
-    private func addMusician(player: Character) -> some View {
+    private func addMusician(player: Character, proxy: ScrollViewProxy) -> some View {
         RoundedRectangle(cornerRadius: 10)
             .frame(width: 300, height: 400)
             .foregroundStyle(player.rarity == "gold" ? .appgold : player.rarity == "purple" ? .apppurple : player.rarity == "green" ? .appgreen : .appgray)
@@ -110,6 +116,7 @@ struct BandView: View {
                 VStack {
                     
                     CardView(musician: player, cardWidth: 270, cardHeight: 300)
+                        .disabled(true)
                     HStack {
                         VStack(alignment: .leading) {
                             Button {
@@ -145,6 +152,7 @@ struct BandView: View {
                                 } else if player.position == "bassist" {
                                     leadBassist = player
                                 }
+                                scrollToTop(proxy: proxy)
                                 addPlayerView = false
                             } label: {
                                 Text("Add Musician")
@@ -168,10 +176,14 @@ struct BandView: View {
                 }
             }
     }
-    
+    private func scrollToTop(proxy: ScrollViewProxy) {
+        withAnimation {
+            proxy.scrollTo("top", anchor: .top)
+        }
+    }
 }
 
 #Preview {
-    BandView(numCoins: .constant(0))
-        .modelContainer(for: Item.self, inMemory: true)
+    BandView(numCoins: .constant(0), appData: .constant(AppData()))
+        
 }

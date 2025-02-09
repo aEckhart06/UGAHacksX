@@ -6,28 +6,27 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct PlaylistView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
     @Binding var numCoins: Int
     @State var textInput: String = ""
     @State var answerIsCorrect: Int = -1
     @State var currentSong: String = ""
     @State var currentArtist: String = ""
+    @State var isPlaying: Bool = false
+    @State var numQuestionsAnswered: Int = 0
     let songs = ["Blinding Lights","Shape of You","Levitating","Uptown Funk","Stay","Bad Guy","Rolling in the Deep","Shallow","Old Town Road","Peaches","Good 4 U","Watermelon Sugar","Save Your Tears"]
     let songsArtists = [
         "Blinding Lights": "The Weeknd",
         "Shape of You": "Ed Sheeran",
         "Levitating": "Dua Lipa",
-        "Uptown Funk": "Mark Ronson ft. Bruno Mars",
-        "Stay": "Kid LAROI & Justin Bieber",
+        "Uptown Funk": "Bruno Mars",
+        "Stay": "Kid LAROI",
         "Bad Guy": "Billie Eilish",
         "Rolling in the Deep": "Adele",
-        "Shallow": "Lady Gaga & Bradley Cooper",
+        "Shallow": "Lady Gaga",
         "Old Town Road": "Lil Nas X",
-        "Peaches": "Justin Bieber ft. Daniel Caesar & Giveon",
+        "Peaches": "Justin Bieber",
         "Good 4 U": "Olivia Rodrigo",
         "Watermelon Sugar": "Harry Styles",
         "Save Your Tears": "The Weeknd"
@@ -42,10 +41,66 @@ struct PlaylistView: View {
                     endPoint: .bottom
                 )
                 .ignoresSafeArea()
+                .onTapGesture {
+                    Utils().dismissKeyboard()
+                }
                 VStack {
-                    ZStack {
-                        ForEach(0..<13) { i in
-                            QuestionCardView(song: songs[i], artist: songsArtists[songs[i]]!, textInput: $textInput, answerIsCorrect: $answerIsCorrect)
+                    if !isPlaying {
+                        Button {
+                            withAnimation {
+                                isPlaying = true
+                                numQuestionsAnswered = 0
+                            }
+                        } label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 25)
+                                    .foregroundStyle(.white)
+                                RoundedRectangle(cornerRadius: 25)
+                                    .stroke(lineWidth: 2)
+                                    .foregroundStyle(.black)
+                                    .overlay {
+                                        VStack {
+                                            Text("How many songs do you know?")
+                                                .font(.title)
+                                                .fontWeight(.semibold)
+                                                .multilineTextAlignment(.center)
+                                                .padding()
+                                            Text("Click to play!")
+                                                .font(.title)
+                                                .fontWeight(.semibold)
+                                        }
+                                        
+                                    }
+                            }
+                            .frame(width: UIScreen.main.bounds.width - 50, height: 300)
+                            .padding(.vertical)
+                        }
+                        .foregroundStyle(.black)
+                    } else {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 25)
+                                .foregroundStyle(.white)
+                            RoundedRectangle(cornerRadius: 25)
+                                .stroke(lineWidth: 2)
+                                .foregroundStyle(.black)
+                                .overlay {
+                                    VStack {
+                                        Text("Who is the artist or band that made this song?")
+                                            .font(.title)
+                                            .fontWeight(.semibold)
+                                            .multilineTextAlignment(.center)
+                                            .padding()
+                                        Text(songs[numQuestionsAnswered])
+                                            .font(.title)
+                                            .fontWeight(.semibold)
+                                    }
+                                    
+                                }
+                        }
+                        .frame(width: UIScreen.main.bounds.width - 50, height: 300)
+                        .padding(.vertical)
+                        .onTapGesture {
+                            Utils().dismissKeyboard()
                         }
                     }
                     ZStack {
@@ -57,14 +112,21 @@ struct PlaylistView: View {
                                 .frame(height: 50)
                                 .padding(8)
                             Button {
-                                
-                                if textInput == "Poop" {
-                                    answerIsCorrect = 1
-                                } else {
-                                    answerIsCorrect = 0
+                                if textInput == songsArtists[songs[numQuestionsAnswered]]! {
+                                    numCoins += 1
                                 }
+                                if numQuestionsAnswered < songs.count - 1 {
+                                    withAnimation {
+                                        numQuestionsAnswered += 1
+                                    }
+                                } else {
+                                    withAnimation {
+                                        numQuestionsAnswered = 0
+                                        isPlaying = false
+                                    }
+                                }
+                                textInput = ""
                                 
-                                print("submitted")
                             } label: {
                                 Image(systemName: "checkmark")
                                     .foregroundStyle(.white)
@@ -80,44 +142,18 @@ struct PlaylistView: View {
                     }
                 }
             }
-        }
-    }
-    /*
-    private func sendRequest(completion: @escaping (String) async -> Void) async {
-        let url = URL(string: "https://accounts.spotify.com/api/token")!
-        
-        // Create request body parameters
-        let parameters = [
-            "grant_type": "client_credentials",
-            "client_id": "64fc8126c5bc403cb586f58b9c859ed9",
-            "client_secret": "2bc179f59822443a9aa5a9a4598d7c44"
-        ]
-        let bodyString = parameters.map { "\($0.key)=\($0.value)" }.joined(separator: "&")
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.httpBody = bodyString.data(using: .utf8)
-        
-        do {
-            
-        } catch {
-            print("Error: \(error)")
-            await completion("")
-        }
-    }
-     */
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    HStack {
+                        Text("\(numCoins)")
+                            .foregroundStyle(.white)
+                            .font(.title3)
+                            .bold()
+                        Image(uiImage: .rCoin)
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                    }
+                }
             }
         }
     }

@@ -42,6 +42,7 @@ struct QuestionCardView: View {
         .rotationEffect(.degrees(degrees))
         .onChange(of: answerIsCorrect) { oldValue, newValue in
             print("test")
+            print(answerIsCorrect)
             if answerIsCorrect == 1 {
                 withAnimation {
                     xOffset = 500

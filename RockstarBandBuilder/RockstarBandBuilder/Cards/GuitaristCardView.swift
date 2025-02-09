@@ -21,7 +21,7 @@ struct GuitaristCardView: View {
                 HStack {
                     VStack(alignment: .leading) {
                         Text(musician.name)
-                            .fontWeight(.heavy)
+                            .fontWeight(.bold)
                         Text("Guitarist")
                             .fontWeight(.heavy)
                         
@@ -35,7 +35,7 @@ struct GuitaristCardView: View {
                     .strokeBorder(style: StrokeStyle(lineWidth: 3, dash: [10, 5]))
                     .fill(.gray.opacity(0.4))
                 
-                    .frame(width: cardWidth, height: 200)
+                    .frame(width: cardWidth, height: cardWidth)
                     .overlay {
                         Text("Lead Guitarist")
                             .foregroundStyle(.white)
