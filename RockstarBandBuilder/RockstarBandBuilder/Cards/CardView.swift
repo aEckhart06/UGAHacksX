@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CardView: View {
-    var musician: Musician
+    var musician: Character
     var cardWidth = UIScreen.main.bounds.width - 20
     var cardHeight = UIScreen.main.bounds.height / 1.45
     @State private var xOffset: CGFloat = 0
@@ -16,7 +16,7 @@ struct CardView: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            Image(.rockstarguitarplayer)
+            Image(uiImage: musician.image)
                 .resizable()
                 .scaledToFit()
                 .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -40,7 +40,7 @@ struct CardView: View {
     }
 }
 struct InfoView: View {
-    var musician: Musician
+    var musician: Character
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
@@ -59,5 +59,5 @@ struct InfoView: View {
 }
 
 #Preview {
-    CardView(musician: Musician(name: "Luke Brian", position: "Guitarist", rarity: 4, genre: "Country"))
+    CardView(musician: Character(name: "Luke Brian", position: "Guitarist", genre: "Country", rarity: "purple", image: .goldPopSinger1))
 }

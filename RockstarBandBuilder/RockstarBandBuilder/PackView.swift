@@ -12,13 +12,7 @@ struct PackView: View {
     var cardWidth = UIScreen.main.bounds.width - 20
     var cardHeight = UIScreen.main.bounds.height / 1.45
     @State var isOpening: Bool = false
-    var musicians: [Musician] = [
-        Musician(name: "Luke Brian", position: "Guitarist", rarity: 4, genre: "Country"),
-        Musician(name: "Kanye West", position: "Singer", rarity: 5, genre: "Rap"),
-        Musician(name: "Taylor Swift", position: "Singer", rarity: 5, genre: "Pop"),
-        Musician(name: "Andrew Primiano", position: "Drummer", rarity: 1, genre: "Rock"),
-        Musician(name: "Luke Katz", position: "Bassist", rarity: 1, genre: "Country")
-    ]
+    var musicians: [Character] = Characters().characters
     var body: some View {
         NavigationView {
             ZStack {
@@ -63,7 +57,7 @@ struct PackView: View {
         
     }
     @ViewBuilder
-    private func openPack(musicians: [Musician]) -> some View {
+    private func openPack(musicians: [Character]) -> some View {
         
         ZStack {
             Button {

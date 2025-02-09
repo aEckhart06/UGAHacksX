@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GuitaristCardView: View {
     var cardWidth: CGFloat
-    @Binding var musician: Musician?
+    @Binding var musician: Character?
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -19,23 +19,26 @@ struct GuitaristCardView: View {
                     .scaledToFit()
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                 HStack {
-                    Text(musician.name)
-                        .fontWeight(.heavy)
+                    VStack(alignment: .leading) {
+                        Text(musician.name)
+                            .fontWeight(.heavy)
+                        Text("Guitarist")
+                            .fontWeight(.heavy)
+                        
+                    }
+                    .foregroundStyle(.white)
+                    .padding()
                     Spacer()
-                    Text("Guitarist")
-                        .fontWeight(.heavy)
-                    
                 }
-                .foregroundStyle(.white)
-                .padding()
             } else {
                 RoundedRectangle(cornerRadius: 10)
                     .strokeBorder(style: StrokeStyle(lineWidth: 3, dash: [10, 5]))
-                    .fill(.gray.opacity(0.6))
+                    .fill(.gray.opacity(0.4))
                 
                     .frame(width: cardWidth, height: 200)
                     .overlay {
                         Text("Lead Guitarist")
+                            .foregroundStyle(.white)
                     }
             }
             

@@ -14,7 +14,7 @@ struct Musician: View, Identifiable, Hashable {
     var position: String
     var rarity: Int
     var genre: String
-    var image: UIImage = .rockstarguitarplayer
+    //var image: UIImage = .rockstarguitarplayer
     
     var body: some View {
         HStack {
@@ -34,11 +34,13 @@ struct Musician: View, Identifiable, Hashable {
             }
             .padding(.horizontal)
             Spacer()
+            /*
             Image(uiImage: image)
                 .resizable()
                 .scaledToFill()
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .frame(width: 50, height: 50)
+             */
         }
         .padding(.horizontal)
     }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SingerCardView: View {
     var cardWidth: CGFloat
-    @Binding var musician: Musician?
+    @Binding var musician: Character?
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -19,23 +19,26 @@ struct SingerCardView: View {
                     .scaledToFit()
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                 HStack {
-                    Text(musician.name)
-                        .fontWeight(.heavy)
+                    VStack(alignment: .leading) {
+                        Text(musician.name)
+                            .fontWeight(.heavy)
+                        Text("Singer")
+                            .fontWeight(.heavy)
+                        
+                    }
+                    .foregroundStyle(.white)
+                    .padding()
                     Spacer()
-                    Text("Singer")
-                        .fontWeight(.heavy)
-                    
                 }
-                .foregroundStyle(.white)
-                .padding()
             } else {
                 RoundedRectangle(cornerRadius: 10)
                     .strokeBorder(style: StrokeStyle(lineWidth: 3, dash: [10, 5]))
-                    .fill(.gray.opacity(0.6))
+                    .fill(.gray.opacity(0.4))
                 
                     .frame(width: cardWidth, height: 200)
                     .overlay {
                         Text("Lead Singer")
+                            .foregroundStyle(.white)
                     }
             }
             
@@ -47,6 +50,3 @@ struct SingerCardView: View {
     }
 }
 
-#Preview {
-    SingerCardView(cardWidth: UIScreen.main.bounds.width / 2 * 0.8, musician: .constant(Musician(name: "Drew", position: "Singer", rarity: 3, genre: "Country")))
-}

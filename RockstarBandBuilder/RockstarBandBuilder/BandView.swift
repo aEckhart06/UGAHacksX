@@ -11,27 +11,30 @@ import SwiftUI
 struct BandView: View {
     
     let cardWidth = UIScreen.main.bounds.width / 2 * 0.8
-    @State var leadSinger: Musician? = nil
-    @State var leadGuitarist: Musician? = nil
-    @State var leadDrummer: Musician? = nil
-    @State var leadBassist: Musician? = nil
+    @State var leadSinger: Character? = nil
+    @State var leadGuitarist: Character? = nil
+    @State var leadDrummer: Character? = nil
+    @State var leadBassist: Character? = nil
     @Binding var numCoins: Int
     @State var addPlayerView: Bool = false
-    @State var selectedMusician: Musician? = nil
-    @State var musicians: [Musician] = [
-        Musician(name: "Luke Brian", position: "Guitarist", rarity: 4, genre: "Country"),
-        Musician(name: "Kanye West", position: "Singer", rarity: 5, genre: "Rap"),
-        Musician(name: "Taylor Swift", position: "Singer", rarity: 5, genre: "Pop"),
-        Musician(name: "Andrew Primiano", position: "Drummer", rarity: 1, genre: "Rock"),
-        Musician(name: "Luke Katz", position: "Bassist", rarity: 1, genre: "Country")
-    ]
+    @State var selectedMusician: Character? = nil
+    @State var musicians: [Character] = Characters().characters
 
     var body: some View {
-        ZStack {
-            Color.white.ignoresSafeArea(.all)
-            NavigationView {
+        
+            
+            
+        NavigationView {
+            
+            ZStack {
+                // Add gradient background
+                LinearGradient(
+                    gradient: Gradient(colors: [.purple, .black]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
                 ScrollView(.vertical) {
-                    
                     HStack(spacing: 20) {
                         SingerCardView(cardWidth: cardWidth, musician: $leadSinger)
                         
@@ -64,27 +67,44 @@ struct BandView: View {
                 .disabled(addPlayerView)
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
-                        Text("Coins: \(numCoins)")
+                        HStack {
+                            Text("\(numCoins)")
+                                .foregroundStyle(.white)
+                                .font(.title3)
+                                .bold()
+                            Image(uiImage: .rCoin)
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                        }
+                    }
+                    
+                }
+                .toolbarBackground(.purple, for: .navigationBar)
+                
+                
+                
+                
+                
+                // Message View
+                if addPlayerView {
+                    Color.black.opacity(0.5).ignoresSafeArea(.all)
+                    if let selectedMusician = self.selectedMusician {
+                        addMusician(player: selectedMusician)
                     }
                 }
             }
-            // Message View
-            if addPlayerView {
-                Color.black.opacity(0.5).edgesIgnoringSafeArea(.all)
-                if let selectedMusician = self.selectedMusician {
-                    addMusician(player: selectedMusician)
-                }
-            }
-            
         }
+        
+        
+        
     }
 
     
     @ViewBuilder
-    private func addMusician(player: Musician) -> some View {
+    private func addMusician(player: Character) -> some View {
         RoundedRectangle(cornerRadius: 10)
             .frame(width: 300, height: 400)
-            .foregroundStyle(.white)
+            .foregroundStyle(player.rarity == "gold" ? .appgold : player.rarity == "purple" ? .apppurple : player.rarity == "green" ? .appgreen : .appgray)
             .shadow(radius: 5)
             .overlay {
                 VStack {
@@ -97,37 +117,49 @@ struct BandView: View {
                             } label: {
                                 
                                 Image(systemName: "xmark")
+                                    .font(.system(size: 20))
                                     .foregroundStyle(.red)
+                                    .bold()
                                     .padding()
                                     .background(content: {
                                         RoundedRectangle(cornerRadius: 10)
                                             .foregroundStyle(.gray)
-                                            .opacity(0.2)
+                                            .opacity(0.7)
+                                            .overlay {
+                                                RoundedRectangle(cornerRadius: 10)
+                                                    .stroke(lineWidth: 2)
+                                                    .foregroundStyle(.black)
+                                            }
                                     })
                             }
                         }
                         Spacer()
                         VStack(alignment: .trailing) {
                             Button {
-                                
-                                if player.position == "Singer" {
+                                if player.position == "singer" {
                                     leadSinger = player
-                                } else if player.position == "Guitarist" {
+                                } else if player.position == "guitarist" {
                                     leadGuitarist = player
-                                } else if player.position == "Drummer" {
+                                } else if player.position == "drummer" {
                                     leadDrummer = player
-                                } else if player.position == "Bassist" {
+                                } else if player.position == "bassist" {
                                     leadBassist = player
                                 }
                                 addPlayerView = false
                             } label: {
                                 Text("Add Musician")
                                     .foregroundStyle(.black)
+                                    .bold()
                                     .padding()
                                     .background(content: {
                                         RoundedRectangle(cornerRadius: 10)
                                             .foregroundStyle(.gray)
-                                            .opacity(0.2)
+                                            .opacity(0.7)
+                                            .overlay {
+                                                RoundedRectangle(cornerRadius: 10)
+                                                    .stroke(lineWidth: 2)
+                                                    .foregroundStyle(.black)
+                                            }
                                     })
                             }
                         }

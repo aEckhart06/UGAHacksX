@@ -35,39 +35,49 @@ struct PlaylistView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                ZStack {
-                    ForEach(0..<13) { i in
-                        QuestionCardView(song: songs[i], artist: songsArtists[songs[i]]!, textInput: $textInput, answerIsCorrect: $answerIsCorrect)
-                    }
-                }
-                ZStack {
-                    
-                    HStack {
-                        TextField("Artist", text: $textInput)
-                            .frame(height: 50)
-                            .padding(8)
-                        Button {
-                            
-                            if textInput == "Poop" {
-                                answerIsCorrect = 1
-                            } else {
-                                answerIsCorrect = 0
-                            }
-                            
-                            print("submitted")
-                        } label: {
-                            Image(systemName: "checkmark")
-                                .foregroundStyle(.black)
-                                .font(.title2)
+            ZStack {
+                LinearGradient(
+                    gradient: Gradient(colors: [.purple, .black]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
+                VStack {
+                    ZStack {
+                        ForEach(0..<13) { i in
+                            QuestionCardView(song: songs[i], artist: songsArtists[songs[i]]!, textInput: $textInput, answerIsCorrect: $answerIsCorrect)
                         }
                     }
-                    .padding(.horizontal)
-                }
-                .frame(width: UIScreen.main.bounds.width - 50, height: 50)
-                .background {
-                    RoundedRectangle(cornerRadius: 15)
-                        .foregroundStyle(.gray.opacity(0.2))
+                    ZStack {
+                        
+                        HStack {
+                            TextField("Artist", text: $textInput)
+                                .bold()
+                                .foregroundStyle(.white)
+                                .frame(height: 50)
+                                .padding(8)
+                            Button {
+                                
+                                if textInput == "Poop" {
+                                    answerIsCorrect = 1
+                                } else {
+                                    answerIsCorrect = 0
+                                }
+                                
+                                print("submitted")
+                            } label: {
+                                Image(systemName: "checkmark")
+                                    .foregroundStyle(.white)
+                                    .font(.title2)
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
+                    .frame(width: UIScreen.main.bounds.width - 50, height: 50)
+                    .background {
+                        RoundedRectangle(cornerRadius: 15)
+                            .foregroundStyle(.gray.opacity(0.2))
+                    }
                 }
             }
         }

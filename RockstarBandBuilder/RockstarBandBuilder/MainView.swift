@@ -9,6 +9,15 @@ import SwiftUI
 
 struct MainView: View {
     @State var numCoins: Int = 0
+    init() {
+        let appearance = UITabBarAppearance()
+        appearance.backgroundColor = UIColor.black // Set the background color
+        appearance.stackedLayoutAppearance.selected.iconColor = UIColor.white // Change icon color when selected
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.white] // Change title color when selected
+        
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+    }
     var body: some View {
         
         ZStack {
@@ -32,10 +41,7 @@ struct MainView: View {
                     } label: {
                         Image(systemName: "rectangle")
                     }
-                    
                 }
-                
-                
                 
             }
             
